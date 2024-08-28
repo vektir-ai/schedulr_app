@@ -1,19 +1,58 @@
+'use client'
+
+import { useState } from 'react'
+import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isToday } from 'date-fns'
+
 const Calendar = () => {
-    return (
-      <div className="bg-white">
-        <div className="mx-auto max-w-7xl py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-lg font-semibold text-indigo-600">Your Schedule</h2>
-            <p className="mt-1 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
-              Calendar View
-            </p>
-            <p className="mx-auto mt-5 max-w-xl text-xl text-gray-500">
-              This is where the calendar component will be implemented.
-            </p>
-          </div>
+  const [currentMonth, setCurrentMonth] = useState(new Date())
+
+  const monthStart = startOfMonth(currentMonth)
+  const monthEnd = endOfMonth(currentMonth)
+  const monthDays = eachDayOfInterval({ start: monthStart, end: monthEnd })
+
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+
+  return (
+    <div className="bg-white shadow rounded-lg p-4">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-xl font-semibold text-gray-800">
+          {format(currentMonth, 'MMMM yyyy')}
+        </h2>
+        <div>
+          <button
+            onClick={() => setCurrentMonth(prev => new Date(prev.getFullYear(), prev.getMonth() - 1, 1))}
+            className="px-2 py-1 mr-2 text-sm bg-indigo-500 text-white rounded hover:bg-indigo-600"
+          >
+            Prev
+          </button>
+          <button
+            onClick={() => setCurrentMonth(prev => new Date(prev.getFullYear(), prev.getMonth() + 1, 1))}
+            className="px-2 py-1 text-sm bg-indigo-500 text-white rounded hover:bg-indigo-600"
+          >
+            Next
+          </button>
         </div>
       </div>
-    )
-  }
-  
-  export default Calendar
+      <div className="grid grid-cols-7 gap-1">
+        {days.map(day => (
+          <div key={day} className="text-center font-semibold text-gray-600">
+            {day}
+          </div>
+        ))}
+        {monthDays.map(day => (
+          <div
+            key={day.toISOString()}
+            className={`p-2 text-center ${
+              !isSameMonth(day, currentMonth) ? 'text-gray-400' :
+              isToday(day) ? 'bg-indigo-100 text-indigo-800 font-semibold' : 'text-gray-800'
+            }`}
+          >
+            {format(day, 'd')}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export default Calendar
