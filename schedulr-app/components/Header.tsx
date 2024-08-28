@@ -6,13 +6,11 @@ const Header = () => {
       <nav className="mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top">
         <div className="flex w-full items-center justify-between border-b border-indigo-500 py-6 lg:border-none">
           <div className="flex items-center">
-            <Link href="/">
-              <span className="sr-only">Schedulr</span>
-              <img
-                className="h-10 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt="Schedulr"
-              />
+            <Link href="/" className="flex items-center">
+              <svg className="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span className="ml-2 text-2xl font-bold text-indigo-600">Schedulr</span>
             </Link>
             <div className="ml-10 hidden space-x-8 lg:block">
               <Link href="/calendar" className="text-base font-medium text-gray-500 hover:text-gray-900">

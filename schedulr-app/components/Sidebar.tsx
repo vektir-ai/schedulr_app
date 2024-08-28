@@ -6,11 +6,10 @@ const Sidebar = () => {
       <div className="h-full flex flex-col">
         <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
           <div className="flex items-center flex-shrink-0 px-4">
-            <img
-              className="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
-              alt="Schedulr"
-            />
+            <svg className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span className="ml-2 text-2xl font-bold text-white">Schedulr</span>
           </div>
           <nav className="mt-5 flex-1 px-2 space-y-1" aria-label="Sidebar">
             <Link
