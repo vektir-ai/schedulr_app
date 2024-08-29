@@ -1,11 +1,14 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import ThemeToggle from './ThemeToggle'
 
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
   return (
-    <header className="bg-base-100 shadow">
+    <header className="bg-base-100 shadow-sm">
       <div className="navbar max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex-1">
           <Link href="/" className="btn btn-ghost normal-case text-xl">
@@ -15,19 +18,36 @@ const Header = () => {
             <span className="ml-2 text-2xl font-bold text-primary">Schedulr</span>
           </Link>
         </div>
-        <div className="flex-none">
+        <div className="flex-none hidden lg:block">
           <ul className="menu menu-horizontal px-1">
             <li><Link href="/dashboard" className="text-base-content hover:text-primary">Dashboard</Link></li>
             <li><Link href="/calendar" className="text-base-content hover:text-primary">Calendar</Link></li>
             <li><Link href="/create-schedule" className="text-base-content hover:text-primary">Create Schedule</Link></li>
           </ul>
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex-none hidden lg:flex items-center space-x-2">
           <ThemeToggle />
-          <Link href="/signin" className="btn btn-ghost text-base-content">Log in</Link>
-          <Link href="/signup" className="btn btn-primary">Get Started</Link>
+          <Link href="/signin" className="btn btn-ghost text-base-content hover:text-primary">Log in</Link>
+          <Link href="/signup" className="btn btn-outline btn-primary">Get Started</Link>
+        </div>
+        <div className="flex-none lg:hidden">
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="btn btn-square btn-ghost">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          </button>
         </div>
       </div>
+      {isMenuOpen && (
+        <div className="lg:hidden">
+          <ul className="menu menu-vertical px-1 py-2">
+            <li><Link href="/dashboard" className="text-base-content hover:text-primary">Dashboard</Link></li>
+            <li><Link href="/calendar" className="text-base-content hover:text-primary">Calendar</Link></li>
+            <li><Link href="/create-schedule" className="text-base-content hover:text-primary">Create Schedule</Link></li>
+            <li><ThemeToggle /></li>
+            <li><Link href="/signin" className="text-base-content hover:text-primary">Log in</Link></li>
+            <li><Link href="/signup" className="btn btn-outline btn-primary mt-2">Get Started</Link></li>
+          </ul>
+        </div>
+      )}
     </header>
   )
 }
